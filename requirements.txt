@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+# mandatory
+
+# build
+build
+
+# doc
+sphinx
+m2r2
+pydata-sphinx-theme
+sphinx-copybutton
+# nbsphinx
+# sphinx-automodapi
+docutils==0.18.1
+
+# Linters
+pylint
+
+
+
+
+
+# tests
+pytest
+pytest-cov
+
+# Useful for Makefile
+distro
