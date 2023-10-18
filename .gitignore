@@ -90,3 +90,6 @@ target/
 
 # IDE settings
 .vscode/
+
+# tmp files
+tmp/

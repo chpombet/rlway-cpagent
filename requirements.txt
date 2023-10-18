@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # mandatory
+minizinc
+rlway @ git+ssh://git@github.com/y-plus/RLway.git
 
 # build
 build

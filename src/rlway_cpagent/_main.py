@@ -1,14 +1,15 @@
 """ Main launching functions and mechanisms
 """
 
+from rlway.pyosrd.osrd import OSRD
 
-from rlway_cpagent.utils.utils import greet
+from rlway_cpagent.cp_agent import CPAgent
 
 
 def main():
     """
     rlway_cpagent main launch function used as an entry point
     """
-
-    msg_l: str = greet("Eurodecision")
-    print(msg_l)
+    sim = OSRD(use_case='c2y13s', dir='tmp')
+    agent = CPAgent("cp_agent", "/mnt/c/Program Files/MiniZinc/minizinc.exe", "gecode")
+    agent.stops(sim)
