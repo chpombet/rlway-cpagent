@@ -38,6 +38,7 @@ setuptools.setup(
     ],
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
+    package_data={"": ['models/*.mzn']},
     entry_points={
         'console_scripts': ['rlway_cpagent = rlway_cpagent._main:main'],
     },
@@ -46,6 +47,7 @@ setuptools.setup(
     setup_requires=["wheel"],
     install_requires=[
         'minizinc',
-        'rlway @ git+ssh://git@github.com/y-plus/RLway.git'
+        'rlway @ git+ssh://git@github.com/y-plus/RLway.git',
+        'importlib-resources'
         ],
 )
