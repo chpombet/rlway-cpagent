@@ -14,6 +14,8 @@ array[1..S] of int: min_arrival; %L'heure d'arrivée min d'une étape
 array[1..S] of int: min_departure; %L'heure de départ min d'une étape
 array[1..S] of int: min_duration; %La durée min d'une étape
 
+array[1..S] of bool: is_fixed;
+
 % Variables
 
 array[1..S] of var int: a; %heure d'arrivée d'une étape
@@ -37,6 +39,11 @@ constraint forall(s in 1..S) (
 %Le train doit passer plus de temps dans une zone que la durée min
 constraint forall(s in 1..S) (
   d[s] - a[s] >= min_duration[s]
+);
+
+%Certaines étapes ont une durée fixe
+constraint forall(s in 1..S where is_fixed[s])(
+  d[s] - a[s] = min_duration[s]
 );
 
 %Succession des étapes

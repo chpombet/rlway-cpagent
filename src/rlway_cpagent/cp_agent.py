@@ -16,7 +16,7 @@ class CPAgent(Agent):
 
     solver_name:str
 
-    def stops(self, osrd:OSRD) -> List[Dict[str, Any]]:
+    def stops(self, osrd: OSRD) -> List[Dict[str, Any]]:
         return self.solveCpProblem(osrd)
 
     def solveCpProblem(self, osrd:OSRD):
@@ -50,6 +50,7 @@ class CPAgent(Agent):
         min_arrival = []
         min_departure = []
         min_duration = []
+        is_fixed = []
 
         for trainIdx in range(len(trains)):
             prev_step = 0
@@ -60,6 +61,7 @@ class CPAgent(Agent):
                 min_arrival.append(int(starts.loc[zone][trainIdx]))
                 min_departure.append(int(ends.loc[zone][trainIdx]))
                 min_duration.append(int(delayed_durations.loc[zone][trainIdx]))
+                is_fixed.append(True if osrd.stop_positions[trainIdx][zone]['offset'] is None else False)
 
                 prev_step = len(train_association)
 
@@ -69,6 +71,7 @@ class CPAgent(Agent):
         instance["min_arrival"] = min_arrival
         instance["min_departure"] = min_departure
         instance["min_duration"] = min_duration
+        instance["is_fixed"] = is_fixed
         
         print(f"Z = {len(zones)};")
         print(f"T = {len(trains)};")
@@ -98,7 +101,7 @@ class CPAgent(Agent):
                     delayed_schedule = delayed_schedule.add_delay(trainIdx, zone, delay)
                     stops.append({
                         "train" : trainIdx,
-                        "position" : self.getZonePosition(osrd, zone, trainIdx),
+                        "position" : osrd.stop_positions[trainIdx][zone]['offset'],
                         "duration" : delay
                     })
                 step_idx +=1
